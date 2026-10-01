@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Solution Bridge — confidential guidance and referral support for cyberbullying, online harassment, blackmail, threats and other online safety concerns.">
+  <title>Solution Bridge | Cyber Safety Support</title>
+
+  <style>
+    :root{
+      --navy:#0b1f3a;
+      --blue:#1769e0;
+      --blue2:#0e4fb7;
+      --sky:#eaf3ff;
+      --ink:#172033;
+      --muted:#61708a;
+      --white:#ffffff;
+      --line:#dfe7f2;
+      --soft:#f7faff;
+      --danger:#b42318;
+      --shadow:0 18px 45px rgba(11,31,58,.10);
+      --radius:20px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:var(--white);
+      line-height:1.6;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1120px,92%);margin:auto}
+
+    /* NAV */
+    nav{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      height:74px;display:flex;align-items:center;justify-content:space-between;
+    }
+    .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.2rem;color:var(--navy)}
+    .brand-mark{
+      width:40px;height:40px;border-radius:12px;background:var(--navy);
+      display:grid;place-items:center;color:white;font-weight:900;
+      box-shadow:0 8px 20px rgba(11,31,58,.18);
+    }
+    .nav-links{display:flex;gap:28px;align-items:center}
+    .nav-links a{font-size:.94rem;color:#40506a;font-weight:600}
+    .nav-links a:hover{color:var(--blue)}
+    .nav-cta{
+      background:var(--blue);color:white!important;padding:10px 17px;border-radius:10px;
+    }
+
+    /* HERO */
+    .hero{
+      background:
+        radial-gradient(circle at 85% 20%, rgba(54,130,255,.18), transparent 28%),
+        linear-gradient(135deg,#f5f9ff 0%,#ffffff 60%);
+      padding:92px 0 78px;
+      overflow:hidden;
+    }
+    .hero-grid{
+      display:grid;grid-template-columns:1.12fr .88fr;gap:60px;align-items:center;
+    }
+    .eyebrow{
+      display:inline-flex;gap:8px;align-items:center;
+      color:var(--blue);background:#e9f2ff;border:1px solid #cfe2ff;
+      padding:7px 12px;border-radius:999px;font-size:.83rem;font-weight:800;
+      margin-bottom:20px;
+    }
+    .dot{width:8px;height:8px;background:#27ae60;border-radius:50%}
+    h1{
+      font-size:clamp(2.7rem,6vw,4.8rem);
+      line-height:1.02;letter-spacing:-.045em;color:var(--navy);
+      margin-bottom:22px;
+    }
+    .hero p{
+      color:var(--muted);font-size:1.1rem;max-width:650px;margin-bottom:30px;
+    }
+    .buttons{display:flex;gap:13px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:9px;
+      padding:13px 19px;border-radius:11px;font-weight:800;border:1px solid transparent;
+      transition:.2s;
+    }
+    .btn-primary{background:var(--blue);color:white}
+    .btn-primary:hover{background:var(--blue2);transform:translateY(-1px)}
+    .btn-secondary{border-color:#cbd8e9;color:var(--navy);background:white}
+    .btn-secondary:hover{border-color:var(--blue);color:var(--blue)}
+
+    .hero-card{
+      background:var(--navy);color:white;border-radius:28px;padding:30px;
+      box-shadow:var(--shadow);position:relative;overflow:hidden;
+    }
+    .hero-card:before{
+      content:"";position:absolute;width:190px;height:190px;border-radius:50%;
+      background:rgba(51,139,255,.22);right:-65px;top:-65px;
+    }
+    .shield{
+      width:62px;height:62px;border-radius:18px;background:#17477f;
+      display:grid;place-items:center;font-size:28px;margin-bottom:25px;
+    }
+    .hero-card h3{font-size:1.45rem;margin-bottom:10px}
+    .hero-card p{font-size:.95rem;color:#cbd9eb;margin:0 0 22px}
+    .mini-list{display:grid;gap:12px}
+    .mini-list div{display:flex;gap:10px;align-items:flex-start;font-size:.91rem;color:#e8eef8}
+    .check{color:#70b1ff;font-weight:900}
+
+    /* SECTIONS */
+    section{padding:82px 0}
+    .section-head{text-align:center;max-width:730px;margin:0 auto 44px}
+    .section-head .label{
+      color:var(--blue);font-weight:850;text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;
+      margin-bottom:10px;
+    }
+    .section-head h2{font-size:clamp(2rem,4vw,3rem);color:var(--navy);line-height:1.12;margin-bottom:13px}
+    .section-head p{color:var(--muted)}
+
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:white;
+      transition:.2s;
+    }
+    .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#c7dcfa}
+    .icon{
+      width:48px;height:48px;border-radius:14px;background:var(--sky);display:grid;place-items:center;
+      font-size:23px;margin-bottom:17px;
+    }
+    .card h3{font-size:1.12rem;margin-bottom:7px;color:var(--navy)}
+    .card p{font-size:.93rem;color:var(--muted)}
+
+    .process{background:var(--soft)}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .step{background:white;border:1px solid var(--line);border-radius:18px;padding:24px}
+    .num{
+      width:35px;height:35px;border-radius:10px;background:var(--navy);color:white;
+      display:grid;place-items:center;font-weight:900;margin-bottom:17px;
+    }
+    .step h3{font-size:1rem;margin-bottom:7px}
+    .step p{font-size:.88rem;color:var(--muted)}
+
+    .safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
+    .safety-box{
+      border:1px solid var(--line);border-radius:var(--radius);padding:30px;background:white;
+    }
+    .safety-box h3{color:var(--navy);margin-bottom:15px}
+    .safety-box ul{list-style:none;display:grid;gap:12px}
+    .safety-box li{display:flex;gap:10px;color:#4c5d76;font-size:.93rem}
+    .bullet{color:var(--blue);font-weight:900}
+    .emergency{border-color:#f0c9c6;background:#fff8f7}
+    .emergency h3{color:var(--danger)}
+    .emergency .bullet{color:var(--danger)}
+
+    /* CONTACT */
+    .contact-wrap{
+      display:grid;grid-template-columns:.82fr 1.18fr;gap:26px;
+      background:var(--navy);border-radius:28px;padding:10px;overflow:hidden;
+    }
+    .contact-info{padding:38px;color:white}
+    .contact-info h2{font-size:2.3rem;line-height:1.1;margin-bottom:14px}
+    .contact-info p{color:#c8d5e7;margin-bottom:24px}
+    .email-box{
+      background:#17365f;border:1px solid #28517f;border-radius:15px;padding:15px;
+      margin-bottom:17px;
+    }
+    .email-box small{display:block;color:#91add0;margin-bottom:3px}
+    .email-box a{color:white;font-weight:800;word-break:break-word}
+    .privacy-note{font-size:.8rem;color:#9db0c9}
+    .form-card{background:white;border-radius:21px;padding:30px}
+    .form-card h3{color:var(--navy);margin-bottom:4px}
+    .form-card .sub{font-size:.84rem;color:var(--muted);margin-bottom:20px}
+    form{display:grid;gap:14px}
+    label{font-size:.83rem;font-weight:800;color:#33425a}
+    input,select,textarea{
+      width:100%;margin-top:6px;border:1px solid #d4dfed;border-radius:10px;
+      padding:12px 13px;font:inherit;color:var(--ink);background:#fbfdff;outline:none;
+    }
+    input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(23,105,224,.10)}
+    textarea{min-height:125px;resize:vertical}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .consent{font-size:.75rem;color:var(--muted);display:flex;gap:8px;align-items:flex-start}
+    .consent input{width:auto;margin-top:3px}
+    .submit{width:100%;cursor:pointer;border:0;font-size:.95rem}
+    .evidence{
+      border:1px dashed #b7c9df;padding:13px;border-radius:10px;background:#f8fbff;
+      font-size:.78rem;color:var(--muted);
+    }
+    .evidence strong{display:block;color:#40506a;margin-bottom:3px}
+
+    /* FOOTER */
+    footer{background:#07172b;color:#aebed2;padding:34px 0}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}
+    .footer-brand{color:white;font-weight:800}
+    footer p{font-size:.8rem}
+    .footer-links{display:flex;gap:18px;font-size:.82rem}
+    .footer-links a:hover{color:white}
+
+    .tiny{font-size:.76rem;color:#74849b;text-align:center;margin-top:18px}
+
+    @media(max-width:850px){
+      .nav-links{display:none}
+      .hero-grid,.safety-grid,.contact-wrap{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr 1fr}
+      .steps{grid-template-columns:1fr 1fr}
+      .hero{padding:65px 0}
+      section{padding:65px 0}
+    }
+    @media(max-width:560px){
+      .cards,.steps,.form-row{grid-template-columns:1fr}
+      .hero-card{padding:24px}
+      .contact-info{padding:28px 22px}
+      .form-card{padding:22px}
+      .footer-inner{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="#home">
+        <span class="brand-mark">SB</span>
+        <span>Solution Bridge</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#support">Support</a>
+        <a href="#process">How It Works</a>
+        <a href="#safety">Safety</a>
+        <a class="nav-cta" href="#contact">Get Help</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="home">
+
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Confidential Cyber-Safety Support</div>
+          <h1>You don't have to face online abuse alone.</h1>
+          <p>
+            Solution Bridge provides a safe starting point for people experiencing
+            cyberbullying, online harassment, blackmail, threats, impersonation,
+            or other harmful online behaviour.
+          </p>
+
+          <div class="buttons">
+            <a class="btn btn-primary" href="#contact">Request Support →</a>
+            <a class="btn btn-secondary" href="#process">Learn How It Works</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="shield">🛡️</div>
+          <h3>Listen. Guide. Connect.</h3>
+          <p>
+            Share what happened, tell us what support you need, and we can help
+            identify appropriate next steps and relevant authorities.
+          </p>
+
+          <div class="mini-list">
+            <div><span class="check">✓</span><span>Respectful, non-judgmental communication</span></div>
+            <div><span class="check">✓</span><span>Guidance on preserving useful evidence</span></div>
+            <div><span class="check">✓</span><span>Referral to relevant support or authorities</span></div>
+            <div><span class="check">✓</span><span>Email-based follow-up</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="support">
+      <div class="container">
+        <div class="section-head">
+          <div class="label">What We Support</div>
+          <h2>Different problems. One place to start.</h2>
+          <p>
+            You can contact Solution Bridge about a range of online safety concerns.
+            You do not need to know the legal or technical terminology before contacting us.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="icon">💬</div>
+            <h3>Cyberbullying</h3>
+            <p>Repeated insults, humiliation, threats, targeting, or harmful behaviour through digital platforms.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🔒</div>
+            <h3>Online Blackmail</h3>
+            <p>Threats to publish private information, images, conversations, or other material unless demands are met.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">⚠️</div>
+            <h3>Online Harassment</h3>
+            <p>Unwanted messages, stalking, intimidation, sexual harassment, or persistent abusive communication.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🎭</div>
+            <h3>Impersonation</h3>
+            <p>Fake profiles, identity misuse, or accounts pretending to be you or someone you know.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">📱</div>
+            <h3>Threats &amp; Abuse</h3>
+            <p>Online threats or abusive conduct that may create safety concerns in digital or offline life.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🧭</div>
+            <h3>Other Online Harm</h3>
+            <p>If your experience does not fit these categories, you can still contact us and explain what happened.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="process">
+      <div class="container">
+        <div class="section-head">
+          <div class="label">The Support Process</div>
+          <h2>What happens after you contact us?</h2>
+          <p>A simple process designed to help you understand your options without making promises about outcomes.</p>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="num">1</div>
+            <h3>Tell us what happened</h3>
+            <p>Send a message through email or the contact form. Share only information you are comfortable providing.</p>
+          </div>
+
+          <div class="step">
+            <div class="num">2</div>
+            <h3>We communicate with you</h3>
+            <p>We review the information and communicate with you by email to understand the situation and your needs.</p>
+          </div>
+
+          <div class="step">
+            <div class="num">3</div>
+            <h3>Discuss possible steps</h3>
+            <p>We can provide general guidance on documentation, reporting options, account safety, and available support.</p>
+          </div>
+
+          <div class="step">
+            <div class="num">4</div>
+            <h3>Connect with relevant help</h3>
+            <p>Where appropriate, we can help identify the relevant authority, platform, service, or support organisation to contact.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="safety">
+      <div class="container">
+        <div class="section-head">
+          <div class="label">Before You Contact Us</div>
+          <h2>Protect yourself and your evidence.</h2>
+          <p>These are general safety suggestions. They are not a substitute for emergency or professional legal assistance.</p>
+        </div>
+
+        <div class="safety-grid">
+          <div class="safety-box">
+            <h3>📁 If it is safe to do so</h3>
+            <ul>
+              <li><span class="bullet">✓</span><span>Keep screenshots, URLs, usernames, dates, and relevant messages.</span></li>
+              <li><span class="bullet">✓</span><span>Save original files rather than editing or cropping the only copy.</span></li>
+              <li><span class="bullet">✓</span><span>Review privacy and security settings on affected accounts.</span></li>
+              <li><span class="bullet">✓</span><span>Consider reporting abusive content through the platform's official reporting tools.</span></li>
+              <li><span class="bullet">✓</span><span>Do not delete useful evidence just because it is upsetting to look at.</span></li>
+            </ul>
+          </div>
+
+          <div class="safety-box emergency">
+            <h3>🚨 If you are in immediate danger</h3>
+            <ul>
+              <li><span class="bullet">!</span><span>Contact your local emergency service or law-enforcement authority immediately.</span></li>
+              <li><span class="bullet">!</span><span>If someone is threatening physical harm, do not rely only on an online support service.</span></li>
+              <li><span class="bullet">!</span><span>If you are a minor, consider telling a trusted parent, guardian, teacher, or other responsible adult.</span></li>
+              <li><span class="bullet">!</span><span>For urgent situations, seek help from someone you trust who can be physically present with you.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-wrap">
+
+          <div class="contact-info">
+            <div class="eyebrow" style="background:#17365f;border-color:#28517f;color:#9fc8ff">
+              Confidential Contact
+            </div>
+            <h2>Start a conversation.</h2>
+            <p>
+              You can explain your situation in your own words. If you have evidence,
+              mention what type of evidence you have. Please do not send passwords,
+              OTP codes, bank details, or other unnecessary sensitive information.
+            </p>
+
+            <!-- CHANGE THIS EMAIL ADDRESS -->
+            <div class="email-box">
+              <small>Support email</small>
+              <a href="mailto:jaysunjerry16@gmail.com">jaysunjerry16@gmail.com</a>
+            </div>
+
+            <div class="privacy-note">
+              <strong>Privacy note:</strong> Solution Bridge is an independent support
+              and referral initiative. Do not assume that this website provides legal
+              confidentiality or guarantees an investigation or specific outcome.
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3>Request Support</h3>
+            <p class="sub">Submitting this form opens your email app with the information you entered.</p>
+
+            <form id="supportForm">
+              <div class="form-row">
+                <div>
+                  <label for="name">Your name</label>
+                  <input id="name" name="name" type="text" placeholder="Optional">
+                </div>
+                <div>
+                  <label for="email">Your email *</label>
+                  <input id="email" name="email" type="email" placeholder="you@example.com" required>
+                </div>
+              </div>
+
+              <div>
+                <label for="issue">What do you need help with? *</label>
+                <select id="issue" name="issue" required>
+                  <option value="">Select an issue</option>
+                  <option>Cyberbullying</option>
+                  <option>Online blackmail</option>
+                  <option>Online harassment</option>
+                  <option>Threats or abuse</option>
+                  <option>Impersonation / fake account</option>
+                  <option>Other online safety concern</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="details">Briefly describe what happened *</label>
+                <textarea id="details" name="details" placeholder="Tell us what happened, when it happened, and what kind of support you are looking for." required></textarea>
+              </div>
+
+              <div class="evidence">
+                <strong>Evidence</strong>
+                This GitHub Pages version does not upload files to a secure server.
+                If you have screenshots or documents, mention that in your message.
+                We can tell you how to share them more safely by email.
+              </div>
+
+              <label class="consent">
+                <input type="checkbox" id="consent" required>
+                <span>I understand that this is a support/referral service and not an emergency service or a guarantee of legal action.</span>
+              </label>
+
+              <button class="btn btn-primary submit" type="submit">Open Email &amp; Send Request →</button>
+            </form>
+
+            <p class="tiny">Your email application will open. Review the message before sending it.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">Solution Bridge</div>
+        <p>Connecting people with safer next steps online.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#support">Support</a>
+        <a href="#safety">Safety</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /*
+      IMPORTANT:
+      Change the support email address in BOTH places:
+      1. The visible email link above.
+      2. The SUPPORT_EMAIL value below.
+    */
+    const SUPPORT_EMAIL = "jaysunjerry16@gmail.com";
+
+    document.getElementById("supportForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim() || "Not provided";
+      const email = document.getElementById("email").value.trim();
+      const issue = document.getElementById("issue").value;
+      const details = document.getElementById("details").value.trim();
+
+      const subject = encodeURIComponent("Solution Bridge Support Request - " + issue);
+      const body = encodeURIComponent(
+`Hello Solution Bridge,
+
+I would like to request support regarding an online safety issue.
+
+Name: ${name}
+My email: ${email}
+Issue: ${issue}
+
+What happened:
+${details}
+
+I understand that Solution Bridge is a support/referral service and not an emergency service or a guarantee of legal action.
+
+Thank you.`
+      );
+
+      window.location.href = `mailto:${SUPPORT_EMAIL}?subject=${subject}&body=${body}`;
+    });
+  </script>
+
+</body>
+</html>
